@@ -25,19 +25,22 @@ export async function POST(request: NextRequest) {
     innerBoard: {
       display: "flex",
       flexWrap: "wrap",
-      width: "1800px", // Adjust this according to your preference
-      height: "1800px", // Adjust this according to your preference
+      width: "2250px", // Adjust this according to your preference
+      height: "2250px", // Adjust this according to your preference
       border: "none",
+      margin: "0",
     },
     cell: {
-      width: "200px",
-      height: "200px",
+      width: "250px",
+      height: "250px",
       boxSizing: "border-box",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      fontSize: "200px",
+      fontSize: "250px",
       borderCollapse: "collapse",
+      margin: "0 auto",
+      padding: "15px 15px"
     },
   };
 
@@ -65,10 +68,9 @@ export async function POST(request: NextRequest) {
         fontWeight: 600,
         textTransform: "uppercase",
         letterSpacing: 1,
-        margin: "22.5px 0 10px",
         color: "black",
         justifyContent: "center",
-        backgroundColor: "blue",
+        margin:  "0 auto"
       }}
     >
       <div
@@ -77,7 +79,6 @@ export async function POST(request: NextRequest) {
           flexDirection: "column",
           height: "100%",
           width: "100%",
-          padding: "10px 10px",
           justifyContent: "center",
           fontFamily: 'Inter, "Material Icons"',
           fontSize: 28,
@@ -100,8 +101,8 @@ export async function POST(request: NextRequest) {
       </div>
     </div>,
     {
-      width: 2000,
-      height: 2000,
+      width: 2250,
+      height: 2250,
       fonts: [
         {
           name: "Inter",
@@ -120,7 +121,7 @@ export async function POST(request: NextRequest) {
   );
 
   const img = await sharp(Buffer.from(svg))
-    .resize(2000)
+    .resize(2340)
     .toFormat("png")
     .toBuffer();
   return new NextResponse(img, {
