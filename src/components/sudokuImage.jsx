@@ -23,8 +23,8 @@ const styles = {
   innerBoard: {
     display: 'flex',
     flexWrap: 'wrap',
-    width: '540px', // Adjust this according to your preference
-    height: '540px', // Adjust this according to your preference
+    width: '550px', // Adjust this according to your preference
+    height: '550px', // Adjust this according to your preference
     border: 'none'
   },
   cell: {
@@ -34,7 +34,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: '20px',
+    fontSize: '50px',
     borderCollapse: 'collapse'
   }
 };
@@ -49,10 +49,10 @@ const getCellBorder = (index) => {
     borderLeft: col % 3 === 0 ? '2px solid black' : '.5px solid black',
     borderRight: col % 3 === 2 ? '2px solid black' : '.5px solid black',
   };
-  if (row === 0) borderStyle.borderTop = '3px solid black';
-  if (row === 8) borderStyle.borderBottom = '3px solid black';
-  if (col === 0) borderStyle.borderLeft = '3px solid black';
-  if (col === 8) borderStyle.borderRight = '3px solid black';
+  if (row === 0) borderStyle.borderTop = '4px solid black';
+  if (row === 8) borderStyle.borderBottom = '4px solid black';
+  if (col === 0) borderStyle.borderLeft = '4px solid black';
+  if (col === 8) borderStyle.borderRight = '4px solid black';
   return borderStyle;
 };
 
@@ -66,8 +66,8 @@ const getCellBorder = (index) => {
           fontWeight: 600,
           textTransform: "uppercase",
           letterSpacing: 1,
-          margin: "25px 0 10px",
-          color: "gray",
+          margin: "0 auto",
+          color: "black",
           justifyContent: "center",
           backgroundColor: "blue",
         }}
@@ -78,10 +78,9 @@ const getCellBorder = (index) => {
             flexDirection: "column",
             height: "100%",
             width: "100%",
-            padding: "10px 20px",
             justifyContent: "center",
             fontFamily: 'Inter, "Material Icons"',
-            fontSize: 28,
+            fontSize: '50px',
             backgroundColor: "white",
             justifyContent: "center",
             alignItems: "center",

@@ -58,7 +58,7 @@ export default async function Home({
   // Example with satori and sharp:
   // const imageUrl = await
   // frameMessage;
-  
+
 
   console.log("info: state is:", state);
     const frameMessage = false
@@ -80,7 +80,7 @@ export default async function Home({
     console.log("info: frameMessage is:", frameMessage);
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_HOST || "http://localhost:3000";
+  const baseUrl = process.env.HOST || "http://localhost:3000";
 
   // then, when done, return next frame
   return (
@@ -101,21 +101,14 @@ export default async function Home({
 
         <FrameInput text="put some text here" />
         <FrameButton onClick={dispatch}>
-          {state?.active === "1" ? "Active" : "Inactive"}
+          Play
+        </FrameButton>
+        <FrameButton href={`${baseUrl}/api/enlarge-board`}>
+        Enlarge
         </FrameButton>
         <FrameButton onClick={dispatch}>
-          {state?.active === "2" ? "Active" : "Inactive"}
+          Verify
         </FrameButton>
-        <FrameButton
-          mint={getTokenUrl({
-            address: "0x060f3edd18c47f59bd23d063bbeb9aa4a8fec6df",
-            tokenId: "123",
-            chainId: 7777777,
-          })}
-        >
-          Mint
-        </FrameButton>
-        <FrameButton href={`https://www.google.com`}>External</FrameButton>
       </FrameContainer>
     </div>
   );
