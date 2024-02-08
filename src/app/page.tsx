@@ -12,21 +12,28 @@ import {
 import Link from "next/link";
 import { DEBUG_HUB_OPTIONS } from "./debug/constants";
 import { getTokenUrl } from "frames.js";
-import SudokuImage from '@/components/sudokuImage'
+import SudokuImage from '@/components/SudokuImage'
 
-type State = {
-  active: string;
-  total_button_presses: number;
+// type State = {
+//   count: number
+// };
+
+// const initialState = { count: 0 };
+
+// const reducer: FrameReducer<State> = (state, action) => {
+//   return {
+//     count: state.count + 1
+//   };
+// };
+type PlayingState = {
+  playingState: string
 };
 
-const initialState = { active: "1", total_button_presses: 0 };
+const initialState = { playingState: 'not-started' };
 
-const reducer: FrameReducer<State> = (state, action) => {
+const reducer: FrameReducer<PlayingState> = (state, action) => {
   return {
-    total_button_presses: state.total_button_presses + 1,
-    active: action.postBody?.untrustedData.buttonIndex
-      ? String(action.postBody?.untrustedData.buttonIndex)
-      : "1",
+    playingState: state.playingState == 'not-started' ? 'started' : 'not-started'
   };
 };
 
@@ -35,18 +42,21 @@ export default async function Home({
   params,
   searchParams,
 }: NextServerPageProps) {
-  const previousFrame = getPreviousFrame<State>(searchParams);
+  const previousFrame = getPreviousFrame<PlayingState>(searchParams);
+
+  const frameMessage = false
 
   // const frameMessage = await getFrameMessage(previousFrame.postBody, {
   //   ...DEBUG_HUB_OPTIONS,
   //   fetchHubContext: true,
+  //   hubHttpUrl: "https://hub.freefarcasterhub.com:3281/",
   // });
 
   // if (frameMessage && !frameMessage?.isValid) {
   //   throw new Error("Invalid frame payload");
   // }
 
-  const [state, dispatch] = useFramesReducer<State>(
+  const [state, dispatch] = useFramesReducer<PlayingState>(
     reducer,
     initialState,
     previousFrame
@@ -58,27 +68,26 @@ export default async function Home({
   // Example with satori and sharp:
   // const imageUrl = await
   // frameMessage;
-
-
+    // const frameMessage = false
   console.log("info: state is:", state);
-    const frameMessage = false
-  if (frameMessage) {
-    const {
-      isValid,
-      buttonIndex,
-      inputText,
-      castId,
-      requesterFid,
-      casterFollowsRequester,
-      requesterFollowsCaster,
-      likedCast,
-      recastedCast,
-      requesterVerifiedAddresses,
-      requesterUserData,
-    } = frameMessage;
 
-    console.log("info: frameMessage is:", frameMessage);
-  }
+  // if (frameMessage) {
+  //   const {
+  //     isValid,
+  //     buttonIndex,
+  //     inputText,
+  //     castId,
+  //     requesterFid,
+  //     casterFollowsRequester,
+  //     requesterFollowsCaster,
+  //     likedCast,
+  //     recastedCast,
+  //     requesterVerifiedAddresses,
+  //     requesterUserData,
+  //   } = frameMessage;
+
+  //   console.log("info: frameMessage is:", frameMessage);
+  // }
 
   const baseUrl = process.env.HOST || "http://localhost:3000";
 
@@ -94,21 +103,19 @@ export default async function Home({
         state={state}
         previousFrame={previousFrame}
       >
-        {/* <FrameImage src="https://framesjs.org/og.png" /> */}
-        <FrameImage>
-          <SudokuImage />
-        </FrameImage>
-
+        {state.playingState == "started" ? (
+          <FrameImage>
+            <SudokuImage />
+          </FrameImage>
+        ) : (
+          <FrameImage src="https://framesjs.org/og.png" />
+        )}
         <FrameInput text="put some text here" />
         <FrameButton onClick={dispatch}>
-          Play
+          {state.playingState == "not-started" ? "Start" : "End"}
         </FrameButton>
-        <FrameButton href={`${baseUrl}/api/enlarge-board`}>
-        Enlarge
-        </FrameButton>
-        <FrameButton onClick={dispatch}>
-          Verify
-        </FrameButton>
+        <FrameButton>{state.playingState}</FrameButton>
+        <FrameButton href={`https://www.google.com`}>External</FrameButton>
       </FrameContainer>
     </div>
   );
