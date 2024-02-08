@@ -18,26 +18,18 @@ const sudokuArray = [
 
 
 
+
 const styles = {
-  outerBoard: {
-    border: '1px solid black',
-    width: '366px', // Adjust this according to your preference
-    height: '366px', // Adjust this according to your preference
-    boxSizing: 'border-box',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   innerBoard: {
     display: 'flex',
     flexWrap: 'wrap',
-    width: '360px', // Adjust this according to your preference
-    height: '360px', // Adjust this according to your preference
+    width: '540px', // Adjust this according to your preference
+    height: '540px', // Adjust this according to your preference
     border: 'none'
   },
   cell: {
-    width: '40px',
-    height: '40px',
+    width: '60px',
+    height: '60px',
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'center',
@@ -69,6 +61,7 @@ const getCellBorder = (index) => {
     return (
       <div
         style={{
+          display: 'flex',
           fontSize: 15,
           fontWeight: 600,
           textTransform: "uppercase",
