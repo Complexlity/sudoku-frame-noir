@@ -1,9 +1,7 @@
 import sudoku_program from "@/../circuit/target/sudoku.json";
 import { BarretenbergBackend } from "@noir-lang/backend_barretenberg";
 import { Noir } from "@noir-lang/noir_js";
-import * as fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
-import { join } from "path";
 
 
 export default async function handler(request: NextApiRequest, res: NextApiResponse) {
@@ -41,17 +39,18 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
 
 
 
-
+  console.log({sudoku_program})
   const inputsFail = { solution: body.puzzle.flatMap(x => x) };
   const inputsCorrect = { solution: body.solution.flatMap(x => x) };
-  console.log({inputsFail, inputsCorrect})
+  // console.log({inputsFail, inputsCorrect})
 
 
   //@ts-expect-error
   const backend = new BarretenbergBackend(sudoku_program);
-
+  console.log({backend})
   //@ts-expect-error
-const program = new Noir(sudoku_program, backend);
+  const program = new Noir(sudoku_program, backend);
+  console.log({program})
 
 
  try {
