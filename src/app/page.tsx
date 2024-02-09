@@ -9,9 +9,6 @@ import {
   useFramesReducer,
   getFrameMessage,
 } from "frames.js/next/server";
-import Link from "next/link";
-import { DEBUG_HUB_OPTIONS } from "./_debug/constants";
-import { getTokenUrl } from "frames.js";
 import SudokuImage from "@/components/SudokuImage";
 
 // type State = {
