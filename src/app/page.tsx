@@ -7,20 +7,16 @@ const initialFrame: Frame = {
   version: "vNext",
   buttons: [
     {
+      label: "Easy",
       action: "post",
-      label: "First",
     },
     {
+      label: "Medium",
       action: "post",
-      label: "Second",
     },
     {
+      label: "Hard",
       action: "post",
-      label: "Third",
-    },
-    {
-      action: "post",
-      label: "Fourth",
     },
   ],
   postUrl: `${process.env.HOST}/frames`,
