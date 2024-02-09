@@ -1,56 +1,37 @@
 import sudoku_program from "@/../circuit/target/sudoku.json";
+import { solveSudoku } from "@/utils/sudoku";
 import { BarretenbergBackend } from "@noir-lang/backend_barretenberg";
 import { Noir } from "@noir-lang/noir_js";
 import { NextApiRequest, NextApiResponse } from "next";
 
 
 export default async function handler(request: NextApiRequest, res: NextApiResponse) {
-  const sudokuArray = [
-    5, 3, 0, 0, 7, 0, 0, 0, 0, 6, 0, 0, 1, 9, 5, 0, 0, 0, 0, 9, 8, 0, 0, 0, 0,
-    6, 0, 8, 0, 0, 0, 6, 0, 0, 0, 3, 4, 0, 0, 8, 0, 3, 0, 0, 1, 7, 0, 0, 0, 2,
-    0, 0, 0, 6, 0, 6, 0, 0, 0, 0, 2, 8, 0, 0, 0, 0, 4, 1, 9, 0, 0, 5, 0, 0, 0,
-    0, 8, 0, 0, 7, 9,
-  ];
 
-  const body = {
-    puzzle: [
-      [0, 1, 0, 0, 0, 8, 0, 0, 0],
-      [0, 6, 2, 4, 0, 0, 0, 3, 5],
-      [0, 0, 0, 0, 3, 2, 0, 0, 0],
-      [6, 5, 0, 2, 0, 9, 0, 0, 0],
-      [8, 0, 0, 0, 6, 0, 0, 0, 0],
-      [0, 0, 0, 0, 8, 5, 0, 6, 0],
-      [0, 0, 9, 0, 0, 0, 0, 7, 0],
-      [3, 8, 0, 0, 0, 0, 2, 0, 1],
-      [0, 0, 5, 0, 0, 0, 0, 9, 0],
-    ],
-    solution: [
-      [7, 1, 3, 5, 9, 8, 4, 2, 6],
-      [9, 6, 2, 4, 1, 7, 8, 3, 5],
-      [5, 4, 8, 6, 3, 2, 9, 1, 7],
-      [6, 5, 1, 2, 4, 9, 7, 8, 3],
-      [8, 9, 7, 3, 6, 1, 5, 4, 2],
-      [2, 3, 4, 7, 8, 5, 1, 6, 9],
-      [4, 2, 9, 1, 5, 3, 6, 7, 8],
-      [3, 8, 6, 9, 7, 4, 2, 5, 1],
-      [1, 7, 5, 8, 2, 6, 3, 9, 4],
-    ],
-  };
+  const puzzle=   [
+      0, 2, 0, 0, 5, 0, 0, 8, 9, 0, 5, 6, 7, 0, 9, 1, 0, 3, 7, 8, 9, 0, 2, 3, 0, 0,
+      6, 2, 1, 0, 3, 0, 5, 0, 9, 0, 3, 6, 5, 8, 9, 7, 0, 1, 4, 8, 0, 7, 2, 0, 4, 3,
+  0, 5, 5, 3, 1, 6, 0, 0, 9, 7, 8, 6, 0, 2, 9, 0, 8, 0, 3, 1, 9, 7, 0, 5, 3, 1,
+  6, 4, 2,
+  ]
+
+  const solution = solveSudoku(puzzle)!
+
+  console.log({solution})
 
 
 
-  console.log({sudoku_program})
-  const inputsFail = { solution: body.puzzle.flatMap(x => x) };
-  const inputsCorrect = { solution: body.solution.flatMap(x => x) };
+// console.log({sudoku_program})
+const inputsFail = { solution: puzzle};
+  const inputsCorrect = { solution };
   // console.log({inputsFail, inputsCorrect})
 
 
   //@ts-expect-error
   const backend = new BarretenbergBackend(sudoku_program);
-  console.log({backend})
+  // console.log({backend})
   //@ts-expect-error
   const program = new Noir(sudoku_program, backend);
-  console.log({program})
+  // console.log({program})
 
 
  try {
