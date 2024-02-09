@@ -1,4 +1,3 @@
-// @ts-nocheckk
 import * as fs from "fs";
 import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
