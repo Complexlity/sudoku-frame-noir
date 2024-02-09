@@ -1,3 +1,6 @@
 node_modules
 .env
 .next
+src/app/debug
+src/app/_debug
+src/app/_examples
