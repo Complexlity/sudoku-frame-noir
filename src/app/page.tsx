@@ -10,6 +10,7 @@ import {
   getFrameMessage,
 } from "frames.js/next/server";
 import SudokuImage from "@/components/SudokuImage";
+import Link from "next/link";
 
 // type State = {
 //   count: number
@@ -114,17 +115,18 @@ console.log({countingState})
   return (
     <div className="p-4">
       frames.js starter kit.{" "}
-      <div>
-        {/* {JSON.stringify(res)} */}
-      </div>
+      <Link href={`/debug?url=${baseUrl}`} className="underline">
+        Debug
+      </Link>
+      <div>{/* {JSON.stringify(res)} */}</div>
       <FrameContainer
         postUrl="/frames"
         state={playingState}
         previousFrame={previousFrame}
       >
-          <FrameImage>
-            <SudokuImage />
-          </FrameImage>
+        <FrameImage>
+          <SudokuImage />
+        </FrameImage>
         <FrameInput text="put some text here" />
         <FrameButton onClick={displayPlayingState}>
           {playingState.playingState == "not-started" ? "Start" : "End"}
