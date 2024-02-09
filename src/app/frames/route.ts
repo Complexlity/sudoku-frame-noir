@@ -36,11 +36,8 @@ export async function POST(request: NextRequest) {
 
   const buttonId = body.untrustedData.buttonIndex;
   let level = searchParams.get("level");
-  console.log({ level });
   let puzzleState = searchParams.get("puzzleState");
-  console.log({ puzzleState });
   if (!level) {
-    console.log("I am here because level is missing");
     if (buttonId == 1) {
       level = "easy";
       puzzleState = getPuzzle(1);
@@ -54,7 +51,7 @@ export async function POST(request: NextRequest) {
 
     const nextFrame: Frame = {
       version: "vNext",
-      image: `${process.env.HOST}/api/board`,
+      image: `${process.env.HOST}/api/board?level=${level}&puzzleState=${puzzleState}`,
       buttons: [
         {
           // label: `Next (pressed by ${message.data.fid})`,'
@@ -92,6 +89,10 @@ export async function POST(request: NextRequest) {
       { status: 302 }
     );
   }
+  if (buttonId == 3) {
+    // verify puzzle state on teh backend server
+  }
+
   // const body = await request.json();
 
   // Parse and validate the frame message
@@ -100,36 +101,35 @@ export async function POST(request: NextRequest) {
   //   return new Response("Invalid message", { status: 400 });
   // }
 
-  const randomInt = Math.floor(Math.random() * 100);
-  const imageUrlBase = `https://picsum.photos/seed/${randomInt}`;
 
   // Use the frame message to build the frame
-  const frame: Frame = {
+  const nextFrame: Frame = {
     version: "vNext",
-    image: `${imageUrlBase}/1146/600`,
+    image: `${process.env.HOST}/api/board?level=${level}&puzzleState=${puzzleState}`,
     buttons: [
       {
         // label: `Next (pressed by ${message.data.fid})`,'
-        label: "Easy",
+        label: "Play",
         action: "post",
       },
       {
         // label: `Next (pressed by ${message.data.fid})`,'
-        label: "Medium",
-        action: "post",
+        label: "Enlarge Board",
+        action: "post_redirect",
       },
       {
         // label: `Next (pressed by ${message.data.fid})`,'
-        label: "Hard",
+        label: "Verify",
         action: "post",
       },
     ],
-    ogImage: `${imageUrlBase}/600`,
-    postUrl: `${process.env.HOST}/frames`,
+    ogImage: `${process.env.HOST}/api/board`,
+    postUrl: `${process.env.HOST}/frames?level=${level}&puzzleState=${puzzleState}`,
+    inputText: "Enter next number",
   };
 
   // Return the frame as HTML
-  const html = getFrameHtml(frame);
+  const html = getFrameHtml(nextFrame);
 
   return new Response(html, {
     headers: {
