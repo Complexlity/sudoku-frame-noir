@@ -50,17 +50,6 @@ fn check_square(a: [u4;N2]) -> bool
 
 
 
-//check the solution corresponds to the puzzle:
-fn check_puzzle(solution: [u4;N2], puzzle: [u4;N2]) -> bool {
-    for i in 0..N {
-        for j in 0..N {
-            assert( (puzzle[N*i+j] == 0) | (puzzle[N*i+j] == solution[N*i+j])) ;
-        };
-    };
-	true
-}
-
-
 fn check_cards(a: [u4;N]) {
   check_cards_best(a);
 }
@@ -148,6 +137,18 @@ fn sort(mut a: [u4;9]) -> [u4;9] {
     a
 }
 
-fn main(solution:[u4;81], puzzle: pub [u4;81]) {
- assert(check_puzzle(solution, puzzle) & check_line(solution) & check_square(solution)  & check_column(solution));
+fn main(solution:[u4;81]) {
+ assert(check_line(solution) & check_square(solution)  & check_column(solution));
+}
+
+#[test]
+fn test_main() {
+  let solution_correct = [8,9,3,7,2,5,4,6,1,4,7,2,3,6,1,5,8,9,1,6,5,4,8,9,3,2,7,9,5,7,6,4,8,2,1,3,6,3,1,5,7,2,8,9,4,2,4,8,9,1,3,6,7,5,5,2,9,8,3,7,1,4,6,7,8,4,1,5,6,9,3,2,3,1,6,2,9,4,7,5,8];
+    main(solution_correct);
+}
+
+#[test(should_fail)]
+fn test_fail_main() {
+  let solution_incorrect = [8,8,3,7,2,5,4,6,1,4,7,2,3,6,1,5,8,9,1,6,5,4,8,9,3,2,7,9,5,7,6,4,8,2,1,3,6,3,1,5,7,2,8,9,4,2,4,8,9,1,3,6,7,5,5,2,9,8,3,7,1,4,6,7,8,4,1,5,6,9,3,2,3,1,6,2,9,4,7,5,8];
+    main(solution_incorrect);
 }

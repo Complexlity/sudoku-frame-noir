@@ -2,7 +2,7 @@
         [package]
         name="sudoku"
         type="bin"
-        authors = ["Guillaume Drevon"]
-        compiler_version = "0.1"
+        authors = ["Complexlity"]
+        compiler_version = "0.23.0"
 
         [dependencies]
