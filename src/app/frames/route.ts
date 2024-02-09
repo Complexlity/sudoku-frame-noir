@@ -3,11 +3,15 @@
 
 import { Frame, getFrameHtml, validateFrameMessage } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
+import { generateSudoku } from "@/utils/sudoku";
 
 //TODO: Create function to generate a new sudoku puzzle
-function getPuzzle(level: number): string {
-  return `${level}`;
+function getPuzzle(level: 1 | 2 | 3): string {
+  const sudokuArray = generateSudoku(level);
+  const sudokuStateAsString = sudokuArray.join("");
+  return sudokuStateAsString;
 }
+
 
 // Function to redirect with 302 nextjs
 // return  NextResponse.redirect(
