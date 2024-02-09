@@ -54,7 +54,7 @@ export default async function Home({
   //   throw new Error("Invalid frame payload");
   // }
 
-  const [state, dispatch] = useFramesReducer<PlayingState>(
+  const [anotherstate, dispatch] = useFramesReducer<PlayingState>(
     reducer,
     initialState,
     previousFrame
@@ -67,7 +67,7 @@ export default async function Home({
   // const imageUrl = await
   // frameMessage;
   // const frameMessage = false
-  console.log("info: state is:", state);
+  console.log("info: state is:", anotherstate);
 
   // if (frameMessage) {
   //   const {
@@ -89,16 +89,25 @@ export default async function Home({
 
   const baseUrl = process.env.HOST || "http://localhost:3000";
 
+
+  /*
+  Successfully generate proof
+  const proofResult = await fetch(`${process.env.PROOF_API_URL}`)
+  const res = await proofResult.json()
+ */
   // then, when done, return next frame
   return (
     <div className="p-4">
       frames.js starter kit.{" "}
+      <div>
+        {/* {JSON.stringify(res)} */}
+      </div>
       <FrameContainer
         postUrl="/frames"
-        state={state}
+        state={anotherstate}
         previousFrame={previousFrame}
       >
-        {state.playingState == "started" ? (
+        {anotherstate.playingState == "started" ? (
           <FrameImage>
             <SudokuImage />
           </FrameImage>
@@ -107,9 +116,9 @@ export default async function Home({
         )}
         <FrameInput text="put some text here" />
         <FrameButton onClick={dispatch}>
-          {state.playingState == "not-started" ? "Start" : "End"}
+          {anotherstate.playingState == "not-started" ? "Start" : "End"}
         </FrameButton>
-        <FrameButton>{state.playingState}</FrameButton>
+        <FrameButton>{anotherstate.playingState}</FrameButton>
         <FrameButton href={`https://www.google.com`}>External</FrameButton>
       </FrameContainer>
     </div>
