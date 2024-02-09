@@ -25,13 +25,25 @@ import SudokuImage from "@/components/SudokuImage";
 type PlayingState = {
   playingState: string;
 };
+type CountState = {
+  count: number;
+};
 
-const initialState = { playingState: "not-started" };
+const initialState = { playingState: "not-started", count: 0 };
 
-const reducer: FrameReducer<PlayingState> = (state, action) => {
+const playingReducer: FrameReducer<PlayingState> = (state, action) => {
   return {
+    ...state,
     playingState:
       state.playingState == "not-started" ? "started" : "not-started",
+  };
+};
+
+const countingReducer: FrameReducer<CountState> = (state, action) => {
+  return {
+    ...state,
+    count:
+      state.count + 1
   };
 };
 
@@ -40,7 +52,7 @@ export default async function Home({
   params,
   searchParams,
 }: NextServerPageProps) {
-  const previousFrame = getPreviousFrame<PlayingState>(searchParams);
+  const previousFrame = getPreviousFrame<any>(searchParams);
 
   const frameMessage = false;
 
@@ -54,12 +66,19 @@ export default async function Home({
   //   throw new Error("Invalid frame payload");
   // }
 
-  const [anotherstate, dispatch] = useFramesReducer<PlayingState>(
-    reducer,
+
+  const [playingState, displayPlayingState] = useFramesReducer<PlayingState>(
+    playingReducer,
     initialState,
     previousFrame
   );
-
+  const [countingState, dispatchCountingState] = useFramesReducer<CountState>(
+    countingReducer,
+    initialState,
+    previousFrame
+  );
+console.log({anotherstate: playingState})
+console.log({countingState})
   // Here: do a server side side effect either sync or async (using await), such as minting an NFT if you want.
   // example: load the users credentials & check they have an NFT
 
@@ -67,7 +86,6 @@ export default async function Home({
   // const imageUrl = await
   // frameMessage;
   // const frameMessage = false
-  console.log("info: state is:", anotherstate);
 
   // if (frameMessage) {
   //   const {
@@ -89,34 +107,32 @@ export default async function Home({
 
   const baseUrl = process.env.HOST || "http://localhost:3000";
 
-  const proofResult = await fetch(`${process.env.PROOF_API_URL}`)
-  const res = await proofResult.json()
+  // const proofResult = await fetch(`${process.env.PROOF_API_URL}`)
+  // const res = await proofResult.json()
 
   // then, when done, return next frame
   return (
     <div className="p-4">
       frames.js starter kit.{" "}
       <div>
-        {JSON.stringify(res)}
+        {/* {JSON.stringify(res)} */}
       </div>
       <FrameContainer
         postUrl="/frames"
-        state={anotherstate}
+        state={playingState}
         previousFrame={previousFrame}
       >
-        {anotherstate.playingState == "started" ? (
           <FrameImage>
             <SudokuImage />
           </FrameImage>
-        ) : (
-          <FrameImage src="https://framesjs.org/og.png" />
-        )}
         <FrameInput text="put some text here" />
-        <FrameButton onClick={dispatch}>
-          {anotherstate.playingState == "not-started" ? "Start" : "End"}
+        <FrameButton onClick={displayPlayingState}>
+          {playingState.playingState == "not-started" ? "Start" : "End"}
         </FrameButton>
-        <FrameButton>{anotherstate.playingState}</FrameButton>
-        <FrameButton href={`https://www.google.com`}>External</FrameButton>
+        <FrameButton>{playingState.playingState}</FrameButton>
+        <FrameButton onClick={dispatchCountingState}>Count</FrameButton>
+        <FrameButton>{countingState.count}</FrameButton>
+        {/* <FrameButton href={`https://www.google.com`}>External</FrameButton> */}
       </FrameContainer>
     </div>
   );
