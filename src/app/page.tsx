@@ -10,9 +10,9 @@ import {
   getFrameMessage,
 } from "frames.js/next/server";
 import Link from "next/link";
-import { DEBUG_HUB_OPTIONS } from "./debug/constants";
+import { DEBUG_HUB_OPTIONS } from "./_debug/constants";
 import { getTokenUrl } from "frames.js";
-import SudokuImage from '@/components/SudokuImage'
+import SudokuImage from "@/components/SudokuImage";
 
 // type State = {
 //   count: number
@@ -26,14 +26,15 @@ import SudokuImage from '@/components/SudokuImage'
 //   };
 // };
 type PlayingState = {
-  playingState: string
+  playingState: string;
 };
 
-const initialState = { playingState: 'not-started' };
+const initialState = { playingState: "not-started" };
 
 const reducer: FrameReducer<PlayingState> = (state, action) => {
   return {
-    playingState: state.playingState == 'not-started' ? 'started' : 'not-started'
+    playingState:
+      state.playingState == "not-started" ? "started" : "not-started",
   };
 };
 
@@ -44,7 +45,7 @@ export default async function Home({
 }: NextServerPageProps) {
   const previousFrame = getPreviousFrame<PlayingState>(searchParams);
 
-  const frameMessage = false
+  const frameMessage = false;
 
   // const frameMessage = await getFrameMessage(previousFrame.postBody, {
   //   ...DEBUG_HUB_OPTIONS,
@@ -68,7 +69,7 @@ export default async function Home({
   // Example with satori and sharp:
   // const imageUrl = await
   // frameMessage;
-    // const frameMessage = false
+  // const frameMessage = false
   console.log("info: state is:", state);
 
   // if (frameMessage) {
@@ -95,9 +96,6 @@ export default async function Home({
   return (
     <div className="p-4">
       frames.js starter kit.{" "}
-      <Link href={`/debug?url=${baseUrl}`} className="underline">
-        Debug
-      </Link>
       <FrameContainer
         postUrl="/frames"
         state={state}
