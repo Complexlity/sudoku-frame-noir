@@ -90,17 +90,17 @@ export default async function Home({
   const baseUrl = process.env.HOST || "http://localhost:3000";
 
 
-  /*
-  Successfully generate proof
+
+
   const proofResult = await fetch(`${process.env.PROOF_API_URL}`)
   const res = await proofResult.json()
- */
+
   // then, when done, return next frame
   return (
     <div className="p-4">
       frames.js starter kit.{" "}
       <div>
-        {/* {JSON.stringify(res)} */}
+        {JSON.stringify(res)}
       </div>
       <FrameContainer
         postUrl="/frames"
