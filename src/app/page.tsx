@@ -89,9 +89,6 @@ export default async function Home({
 
   const baseUrl = process.env.HOST || "http://localhost:3000";
 
-
-
-
   const proofResult = await fetch(`${process.env.PROOF_API_URL}`)
   const res = await proofResult.json()
 
