@@ -9,11 +9,11 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0
   '@noir-lang/backend_barretenberg':
-    specifier: ^0.17.0
-    version: 0.17.0
+    specifier: ^0.23.0
+    version: 0.23.0
   '@noir-lang/noir_js':
-    specifier: ^0.17.0
-    version: 0.17.0
+    specifier: ^0.23.0
+    version: 0.23.0
   '@noir-lang/types':
     specifier: ^0.23.0
     version: 0.23.0
@@ -87,8 +87,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /@aztec/bb.js@0.8.10:
-    resolution: {integrity: sha512-J+zJF8cugsDDldaEqMhBe9xLEiya/D0eqUIOJWhjoaiMzjTFVWUuSrMGLWmIcpUofGOsN3jraPBFjSDxXuHQwQ==}
+  /@aztec/bb.js@0.19.0:
+    resolution: {integrity: sha512-I28AdggGl/5FjOEdOCYXviH0TnQUjEl2B95sux1kVJj8MiwD1rmx/tuaQBvUwRKe3hg/4C1KQRYWFn4vwlhg3A==}
     hasBin: true
     dependencies:
       comlink: 4.4.1
@@ -558,40 +558,30 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  /@noir-lang/acvm_js@0.29.0:
-    resolution: {integrity: sha512-4Qryt25YKGT5eKiIPs08iABTeO0xX3RZh3Y3iT3K+j5givq4Vp6oqaaMpjDvYLJ7XdMGxmEUi2Ynv2oJG3klgA==}
+  /@noir-lang/acvm_js@0.39.0:
+    resolution: {integrity: sha512-Y77qyfamkYSIzzKFkewTwExzTvxYcRd1XBqo950ti4uKMdu18GthkOssqC7CGacwx5PdrdOGFGRJbVtjoXeKIg==}
     dev: false
 
-  /@noir-lang/backend_barretenberg@0.17.0:
-    resolution: {integrity: sha512-2LeJkrzaISvl/chDtC36G9J95O5wiu0fV4+9RcwgXZcR0DNHvSohIPd0ni70wwQQSSTHpWuM5nI3bXbTBoWugg==}
+  /@noir-lang/backend_barretenberg@0.23.0:
+    resolution: {integrity: sha512-amehMEE8kEMEbuxvPT1H9BwVQyEFFip6ajHWhgJjw/PkNB8tBzP+ekVrcEvxVerAKNikfzCEWS/kV7CEWcQNzA==}
     dependencies:
-      '@aztec/bb.js': 0.8.10
-      '@noir-lang/types': 0.17.0
+      '@aztec/bb.js': 0.19.0
+      '@noir-lang/types': 0.23.0
       fflate: 0.8.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@noir-lang/noir_js@0.17.0:
-    resolution: {integrity: sha512-tKt0OR0yf5jX/vmrL8vjXAaqMseN6SBG3oaXywze9FpZGzSulrZaFqs9NyWWyJY/oCMxoUHSkmVoHlcPqkCkPA==}
+  /@noir-lang/noir_js@0.23.0:
+    resolution: {integrity: sha512-eblqgm0PjgptYG+TkK2Dmp/Y2fEhjM5sqMam+QUQHn/2WmC+8/LO2a0FQU0t1432BGCII6/TfojQzgQobuXJAw==}
     dependencies:
-      '@noir-lang/acvm_js': 0.29.0
-      '@noir-lang/noirc_abi': 0.17.0
-      '@noir-lang/types': 0.17.0
-    dev: false
-
-  /@noir-lang/noirc_abi@0.17.0:
-    resolution: {integrity: sha512-tpFsjaac+w8egXJy5sxf2EqOMSws+30angpVqsO1vGPwGZfsnH4FHKEb0L8BvzPmPEAzXh8+WBX/pl52WaLfoA==}
+      '@noir-lang/acvm_js': 0.39.0
+      '@noir-lang/noirc_abi': 0.23.0
+      '@noir-lang/types': 0.23.0
     dev: false
 
   /@noir-lang/noirc_abi@0.23.0:
     resolution: {integrity: sha512-MYBkj6hSpiimlcBmX6n/hY+y2Kk39Qh8qre5c41GZPvmC88f7MqhAdDTSsfrFnNg1pvpY5UX6/G1D8jEkT11qA==}
-    dev: false
-
-  /@noir-lang/types@0.17.0:
-    resolution: {integrity: sha512-noFsyoTLeVQCfB2NeYNIj3Dqy0i5hhCvDHj2maGe+pC5diUe6KBLkGj2lUyc8WLHq0gNpdrEfyd1mNHCs5scWA==}
-    dependencies:
-      '@noir-lang/noirc_abi': 0.17.0
     dev: false
 
   /@noir-lang/types@0.23.0:
