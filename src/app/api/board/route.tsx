@@ -1,3 +1,4 @@
+import { generateSudoku } from "@/utils/sudoku";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
@@ -75,15 +76,11 @@ export async function POST(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const size = (searchParams.get("size") || "small") as BoardSize;
   const puzzleState = searchParams.get("puzzleState");
-  let sudokuArray;
+  let sudokuArray: number[];
 
   if (!puzzleState) {
-    sudokuArray = [
-      5, 3, 0, 0, 7, 0, 0, 0, 0, 6, 0, 0, 1, 9, 5, 0, 0, 0, 0, 9, 8, 0, 0, 0, 0,
-      6, 0, 8, 0, 0, 0, 6, 0, 0, 0, 3, 4, 0, 0, 8, 0, 3, 0, 0, 1, 7, 0, 0, 0, 2,
-      0, 0, 0, 6, 0, 6, 0, 0, 0, 0, 2, 8, 0, 0, 0, 0, 4, 1, 9, 0, 0, 5, 0, 0, 0,
-      0, 8, 0, 0, 7, 9,
-    ];
+    sudokuArray = generateSudoku(1)
+    ;
   } else {
     sudokuArray = puzzleState.split("").map(Number);
   }

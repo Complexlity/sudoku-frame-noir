@@ -12,14 +12,6 @@ function getPuzzle(level: 1 | 2 | 3): string {
   return sudokuStateAsString;
 }
 
-
-// Function to redirect with 302 nextjs
-// return  NextResponse.redirect(
-//       prevFrame.prevRedirects[
-//         `${prevFrame.postBody?.untrustedData.buttonIndex}`
-//       ]!,
-//       { status: 302 }
-
 export async function POST(request: NextRequest) {
   let body;
   try {
@@ -50,18 +42,6 @@ export async function POST(request: NextRequest) {
       puzzleState = getPuzzle(2);
     }
 
-
-    // type FrameButton = {
-    //   label: string
-    // } & ({
-    //   action: "post" | "post_redirect"
-    // } | {
-    //   action: "link" | "mint"
-    //   target: "string"
-    // }
-    // )
-
-
     const nextFrame: Frame = {
       version: "vNext",
       image: `${process.env.HOST}/api/board?puzzleState=${puzzleState}`,
@@ -87,6 +67,7 @@ export async function POST(request: NextRequest) {
       ogImage: `${process.env.HOST}/api/board`,
       postUrl: `${process.env.HOST}/frames?level=${level}&puzzleState=${puzzleState}`,
       inputText: "Enter next number",
+      imageAspectRatio: "1:1"
     };
 
     const html = getFrameHtml(nextFrame);
@@ -105,7 +86,56 @@ export async function POST(request: NextRequest) {
     );
   }
   if (buttonId == 3) {
+    const payload = {
+      solution: puzzleState
+    }
     // verify puzzle state on teh backend server
+    const proof = await fetch(`${process.env.PROOF_API_URL}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+
+    });
+    const result = await proof.json()
+
+    let gameStatus = ''
+    if (result.error) {
+      // Return error image
+      gameStatus = ''
+    }
+    else gameStatus = ''
+
+    const nextFrame: Frame = {
+      version: "vNext",
+      image: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
+      buttons: [
+        {
+          label: "Restart",
+          action: "post",
+        },
+        {
+          label: "Learn Noir",
+          action: "link",
+          target: `https://noir-lang.org/`,
+        },
+      ],
+      ogImage: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
+      postUrl: `${process.env.HOST}/frames`,
+      imageAspectRatio: "1:1",
+    };
+
+    // Return the frame as HTML
+    const html = getFrameHtml(nextFrame);
+
+    return new Response(html, {
+      headers: {
+        "Content-Type": "text/html",
+      },
+      status: 200,
+    });
+
   }
 
   //Else buttonId is 1
@@ -158,7 +188,6 @@ export async function POST(request: NextRequest) {
         target: `${process.env.HOST}/api/board?size=large&puzzleState=${puzzleState}`,
       },
       {
-        // label: `Next (pressed by ${message.data.fid})`,'
         label: "Verify",
         action: "post",
       },
@@ -166,6 +195,7 @@ export async function POST(request: NextRequest) {
     ogImage: `${process.env.HOST}/api/board`,
     postUrl: `${process.env.HOST}/frames?level=${level}&puzzleState=${puzzleState}`,
     inputText: "Enter next number",
+    imageAspectRatio: "1:1"
   };
 
   // Return the frame as HTML
