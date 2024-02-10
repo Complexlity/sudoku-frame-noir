@@ -97,28 +97,33 @@ export async function POST(request: NextRequest) {
     });
     const result = await proof.json()
 
-    let gameStatus = ''
-    if (result.error) {
+    let imageUrl = `${process.env.HOST}/try-again.gif`
+    let isGameWon = false
+    if (result.proof) {
       // Return error image
-      gameStatus = ''
+      isGameWon = true
+      imageUrl = `${process.env.HOST}/congratulations.gif`
     }
-    else gameStatus = ''
+
+
 
     const nextFrame: Frame = {
       version: "vNext",
-      image: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
+      // image: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
+      image: imageUrl,
       buttons: [
         {
           label: "Restart",
           action: "post",
         },
         {
-          label: "Learn Noir",
+          label: isGameWon ? "Learn Noir" : "Learn Sudoku",
           action: "link",
-          target: `https://noir-lang.org/`,
+          target: isGameWon ? "https://noir-lang.org/" : "https://en.wikipedia.org/wiki/Sudoku",
         },
       ],
-      ogImage: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
+      // ogImage: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
+      ogImage: imageUrl,
       postUrl: `${process.env.HOST}/frames`,
       imageAspectRatio: "1:1",
     };
