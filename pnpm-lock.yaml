@@ -24,8 +24,8 @@ dependencies:
     specifier: ^0.23.0
     version: 0.23.0
   frames.js:
-    specifier: ^0.4.3
-    version: 0.4.3(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+    specifier: ^0.5.0
+    version: 0.5.0(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
   next:
     specifier: 14.1.0
     version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
@@ -1746,8 +1746,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /frames.js@0.4.3(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-XQ87NiLAK3tIJr7Jo53gMHkxHlJpHwJYudW4QWUyZqZEXrqS9DlBBY14U2OEnzZqqSq1dnKGEXfQ2jMQGRFZRw==}
+  /frames.js@0.5.0(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-RGFYS9R3MBKss+P+6o+0Wymzat98EP76m6Q16JVz0Zw6SiKGzvUoyNY+AsveK2et98UxRjxwBeFkV4xDSut2PA==}
     peerDependencies:
       next: 14.1.0
       react: ^18.2.0

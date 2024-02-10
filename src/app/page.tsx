@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div>Hello world</div>
+    <div></div>
   )
 }
 
