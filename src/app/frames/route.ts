@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
       untrustedData: {
         buttonIndex: 1,
         fid: 213144,
+        inputText: "4",
       },
     };
   }
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
   const buttonId = body.untrustedData.buttonIndex;
   let level = searchParams.get("level");
   let puzzleState = searchParams.get("puzzleState");
-  if (!level) {
+  if (!level || !puzzleState) {
     if (buttonId == 1) {
       level = "easy";
       puzzleState = getPuzzle(1);
@@ -92,6 +93,25 @@ export async function POST(request: NextRequest) {
   if (buttonId == 3) {
     // verify puzzle state on teh backend server
   }
+
+  //Else buttonId is 1
+  const puzzleStateArray = puzzleState.split('')
+
+  const playerMove = Number(body.untrustedData.inputText)
+
+  //Player must enter a number in the input
+  if (!isNaN(playerMove) || !(playerMove === 0)) {
+    for (let i = 0; i < puzzleStateArray.length; i++) {
+      const curr = Number(puzzleStateArray[i])
+      if (curr === 0) {
+        puzzleStateArray[i] = `${playerMove}`
+        break
+      }
+    }
+    puzzleState = puzzleStateArray.join('')
+
+  }
+
 
   // const body = await request.json();
 
