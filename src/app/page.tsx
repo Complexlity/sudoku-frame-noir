@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: "https://picsum.photos/seed/frames.js/600",
+        url: "https://picsum.photos/600/600",
       },
     ],
   },
