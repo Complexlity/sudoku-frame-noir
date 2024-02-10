@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
       ],
       // ogImage: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
       ogImage: imageUrl,
-      postUrl: `${process.env.HOST}/frames`,
+      postUrl: `${process.env.HOST}`,
       imageAspectRatio: "1:1",
     };
 
