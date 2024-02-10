@@ -109,7 +109,6 @@ export async function POST(request: NextRequest) {
 
     const nextFrame: Frame = {
       version: "vNext",
-      // image: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
       image: imageUrl,
       buttons: [
         {
@@ -122,9 +121,8 @@ export async function POST(request: NextRequest) {
           target: isGameWon ? "https://noir-lang.org/" : "https://en.wikipedia.org/wiki/Sudoku",
         },
       ],
-      // ogImage: `${process.env.HOST}/api/final?gameStatus=${gameStatus}`,
       ogImage: imageUrl,
-      postUrl: `${process.env.HOST}`,
+      postUrl: `${process.env.HOST}/start`,
       imageAspectRatio: "1:1",
     };
 

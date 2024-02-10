@@ -20,6 +20,7 @@ const initialFrame: Frame = {
     },
   ],
   postUrl: `${process.env.HOST}/frames`,
+  imageAspectRatio: "1:1"
 };
 
 // Export Next.js metadata
