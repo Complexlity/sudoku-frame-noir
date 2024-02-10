@@ -151,6 +151,3 @@ export function solveSudoku(puzzle: number[]): number[] | null {
   return null; // If no solution found
 }
 
-console.log(generateSudoku(1));
-// console.log(generateSudoku(2));
-// console.log(generateSudoku(3));
