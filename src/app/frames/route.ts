@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     const nextFrame: Frame = {
       version: "vNext",
-      image: `${process.env.HOST}/api/board?level=${level}&puzzleState=${puzzleState}`,
+      image: `${process.env.HOST}/api/board?puzzleState=${puzzleState}`,
       buttons: [
         {
           // label: `Next (pressed by ${message.data.fid})`,'
@@ -113,8 +113,11 @@ export async function POST(request: NextRequest) {
 
   const playerMove = Number(body.untrustedData.inputText)
 
+
+
   //Player must enter a number in the input
-  if (!isNaN(playerMove) || !(playerMove === 0)) {
+  if (!(isNaN(playerMove)) && playerMove !== 0) {
+    console.log("Is not NaN", playerMove)
     for (let i = 0; i < puzzleStateArray.length; i++) {
       const curr = Number(puzzleStateArray[i])
       if (curr === 0) {
@@ -125,7 +128,9 @@ export async function POST(request: NextRequest) {
     puzzleState = puzzleStateArray.join('')
 
   }
-
+  else {
+  console.log("is NaN", playerMove);
+  }
 
   // const body = await request.json();
 
@@ -139,7 +144,7 @@ export async function POST(request: NextRequest) {
   // Use the frame message to build the frame
   const nextFrame: Frame = {
     version: "vNext",
-    image: `${process.env.HOST}/api/board?level=${level}&puzzleState=${puzzleState}`,
+    image: `${process.env.HOST}/api/board?puzzleState=${puzzleState}`,
     buttons: [
       {
         // label: `Next (pressed by ${message.data.fid})`,'
