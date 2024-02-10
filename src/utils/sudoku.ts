@@ -1,7 +1,21 @@
-import { getUnpackedSettings } from "http2";
-
 export function generateSudoku(difficulty: number): number[] {
-  const emptyBoard: number[] = Array(81).fill(0);
+  const emptyBoard = Array(81).fill(0);
+
+  // Helper function to shuffle an array
+  function shuffleArray(array: number[]): void {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      //@ts-ignore
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  // Fill the first row of the board with shuffled numbers 1 through 9
+  const firstRow = Array.from({ length: 9 }, (_, i) => i + 1);
+  shuffleArray(firstRow);
+  for (let i = 0; i < 9; i++) {
+    emptyBoard[i] = firstRow[i];
+  }
 
   // Helper function to check if a number is valid to be placed in a cell
   function isValid(
@@ -137,6 +151,6 @@ export function solveSudoku(puzzle: number[]): number[] | null {
   return null; // If no solution found
 }
 
-console.log(generateSudoku(1))
-
-console.log(solveSudoku(generateSudoku(1))!.join(""))
+console.log(generateSudoku(1));
+// console.log(generateSudoku(2));
+// console.log(generateSudoku(3));

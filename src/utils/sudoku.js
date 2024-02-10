@@ -1,8 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.solveSudoku = exports.generateSudoku = void 0;
+exports.solveSudoku = void 0;
 function generateSudoku(difficulty) {
     var emptyBoard = Array(81).fill(0);
+    // Helper function to shuffle an array
+    function shuffleArray(array) {
+        var _a;
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            //@ts-ignore
+            _a = [array[j], array[i]], array[i] = _a[0], array[j] = _a[1];
+        }
+    }
+    // Fill the first row of the board with shuffled numbers 1 through 9
+    var firstRow = Array.from({ length: 9 }, function (_, i) { return i + 1; });
+    shuffleArray(firstRow);
+    for (var i = 0; i < 9; i++) {
+        emptyBoard[i] = firstRow[i];
+    }
     // Helper function to check if a number is valid to be placed in a cell
     function isValid(board, row, col, num) {
         // Check row
@@ -49,7 +64,7 @@ function generateSudoku(difficulty) {
     }
     // Helper function to remove numbers based on difficulty
     function removeNumbers(board, difficulty) {
-        var numToRemove = difficulty === 1 ? 25 : difficulty === 2 ? 35 : 45;
+        var numToRemove = difficulty === 1 ? 25 : difficulty === 2 ? 45 : 55;
         var count = 0;
         while (count < numToRemove) {
             var index = Math.floor(Math.random() * 81);
@@ -65,7 +80,6 @@ function generateSudoku(difficulty) {
     removeNumbers(emptyBoard, difficulty);
     return emptyBoard;
 }
-exports.generateSudoku = generateSudoku;
 function solveSudoku(puzzle) {
     // Helper function to check if a number is valid to be placed in a cell
     function isValid(board, row, col, num) {
@@ -121,4 +135,5 @@ function solveSudoku(puzzle) {
 }
 exports.solveSudoku = solveSudoku;
 console.log(generateSudoku(1));
-console.log(solveSudoku(generateSudoku(1)).join(""));
+// console.log(generateSudoku(2));
+// console.log(generateSudoku(3));
