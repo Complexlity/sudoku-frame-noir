@@ -50,6 +50,18 @@ export async function POST(request: NextRequest) {
       puzzleState = getPuzzle(2);
     }
 
+
+    // type FrameButton = {
+    //   label: string
+    // } & ({
+    //   action: "post" | "post_redirect"
+    // } | {
+    //   action: "link" | "mint"
+    //   target: "string"
+    // }
+    // )
+
+
     const nextFrame: Frame = {
       version: "vNext",
       image: `${process.env.HOST}/api/board?level=${level}&puzzleState=${puzzleState}`,
@@ -57,12 +69,14 @@ export async function POST(request: NextRequest) {
         {
           // label: `Next (pressed by ${message.data.fid})`,'
           label: "Play",
-          action: "post",
+          action: "post"
+
         },
         {
           // label: `Next (pressed by ${message.data.fid})`,'
           label: "Enlarge Board",
-          action: "post_redirect",
+          action: "link",
+          target: `${process.env.HOST}/api/board?size=large&puzzleState=${puzzleState}`,
         },
         {
           // label: `Next (pressed by ${message.data.fid})`,'
@@ -135,7 +149,8 @@ export async function POST(request: NextRequest) {
       {
         // label: `Next (pressed by ${message.data.fid})`,'
         label: "Enlarge Board",
-        action: "post_redirect",
+        action: "link",
+        target: `${process.env.HOST}/api/board?size=large&puzzleState=${puzzleState}`,
       },
       {
         // label: `Next (pressed by ${message.data.fid})`,'
