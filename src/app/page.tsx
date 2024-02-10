@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 // Declare the frame
 const initialFrame: Frame = {
-  image: "https://picsum.photos/seed/frames.js/1146/600",
+  image: "https://picsum.photos/600/600",
   version: "vNext",
   buttons: [
     {
