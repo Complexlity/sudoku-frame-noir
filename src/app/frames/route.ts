@@ -47,19 +47,16 @@ export async function POST(request: NextRequest) {
       image: `${process.env.HOST}/api/board?puzzleState=${puzzleState}`,
       buttons: [
         {
-          // label: `Next (pressed by ${message.data.fid})`,'
           label: "Play",
           action: "post"
 
         },
         {
-          // label: `Next (pressed by ${message.data.fid})`,'
           label: "Enlarge Board",
           action: "link",
           target: `${process.env.HOST}/api/board?size=large&puzzleState=${puzzleState}`,
         },
         {
-          // label: `Next (pressed by ${message.data.fid})`,'
           label: "Verify",
           action: "post",
         },
@@ -177,12 +174,10 @@ export async function POST(request: NextRequest) {
     image: `${process.env.HOST}/api/board?puzzleState=${puzzleState}`,
     buttons: [
       {
-        // label: `Next (pressed by ${message.data.fid})`,'
         label: "Play",
         action: "post",
       },
       {
-        // label: `Next (pressed by ${message.data.fid})`,'
         label: "Enlarge Board",
         action: "link",
         target: `${process.env.HOST}/api/board?size=large&puzzleState=${puzzleState}`,
