@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
         },
       ],
       ogImage: imageUrl,
-      postUrl: `${process.env.HOST}/start`,
+      postUrl: `${process.env.HOST}/api/start`,
       imageAspectRatio: "1:1",
     };
 
