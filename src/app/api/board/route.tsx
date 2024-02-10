@@ -1,18 +1,7 @@
-import * as fs from "fs";
-import { NextRequest, NextResponse } from "next/server";
-import { join } from "path";
-import satori from "satori";
-import sharp from "sharp";
+import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 
-const interRegPath = join(process.cwd(), "public/Inter-Regular.ttf");
-let interReg = fs.readFileSync(interRegPath);
-console.log({ interRegPath });
-
-const interBoldPath = join(process.cwd(), "public/Inter-Bold.ttf");
-let interBold = fs.readFileSync(interBoldPath);
-console.log({ interBoldPath });
-
-type BoardSize = 'small' | 'large'
+type BoardSize = "small" | "large";
 export interface SizeSchema {
   innerBoardWidth: string;
   innerBoardHeight: string;
@@ -29,6 +18,7 @@ export interface SizeSchema {
   satoriWidth: number;
   satoriHeight: number;
   sharpResize: number;
+  marginInnerBoard: string;
 }
 
 function getSizes(size: BoardSize): SizeSchema {
@@ -50,6 +40,7 @@ function getSizes(size: BoardSize): SizeSchema {
         satoriWidth: 2250,
         satoriHeight: 2250,
         sharpResize: 2340,
+        marginInnerBoard: "2px",
       };
     default:
       return {
@@ -68,33 +59,36 @@ function getSizes(size: BoardSize): SizeSchema {
         satoriWidth: 600,
         satoriHeight: 400,
         sharpResize: 1200,
+        marginInnerBoard: "2px",
       };
   }
 }
 
-
 export async function POST(request: NextRequest) {
+  const robotoMono400 = fetch(
+    new URL(
+      "../../../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-400-normal.woff",
+      import.meta.url
+    )
+  ).then((res) => res.arrayBuffer());
+
   const { searchParams } = new URL(request.url);
-  const size = (searchParams.get("size") || 'small') as BoardSize
-  const puzzleState = searchParams.get("puzzleState")
+  const size = (searchParams.get("size") || "small") as BoardSize;
+  const puzzleState = searchParams.get("puzzleState");
   let sudokuArray;
 
   if (!puzzleState) {
-
     sudokuArray = [
       5, 3, 0, 0, 7, 0, 0, 0, 0, 6, 0, 0, 1, 9, 5, 0, 0, 0, 0, 9, 8, 0, 0, 0, 0,
       6, 0, 8, 0, 0, 0, 6, 0, 0, 0, 3, 4, 0, 0, 8, 0, 3, 0, 0, 1, 7, 0, 0, 0, 2,
       0, 0, 0, 6, 0, 6, 0, 0, 0, 0, 2, 8, 0, 0, 0, 0, 4, 1, 9, 0, 0, 5, 0, 0, 0,
       0, 8, 0, 0, 7, 9,
     ];
-
-  }
-  else {
-    sudokuArray = puzzleState.split('').map(Number);
+  } else {
+    sudokuArray = puzzleState.split("").map(Number);
   }
 
-
-  const sizes = getSizes(size)
+  const sizes = getSizes(size);
 
   const styles = {
     innerBoard: {
@@ -103,7 +97,7 @@ export async function POST(request: NextRequest) {
       width: sizes.innerBoardWidth, // Adjust this according to your preference
       height: sizes.innerBoardHeight, // Adjust this according to your preference
       border: "none",
-      margin: "2px auto",
+      margin: `${sizes.marginInnerBoard} auto`,
     },
     cell: {
       width: sizes.cellWidth,
@@ -115,7 +109,7 @@ export async function POST(request: NextRequest) {
       fontSize: sizes.cellFontSize,
       borderCollapse: "collapse",
       margin: "0 auto",
-      padding: sizes.cellPadding
+      padding: sizes.cellPadding,
     },
   };
 
@@ -128,84 +122,78 @@ export async function POST(request: NextRequest) {
       borderLeft: col % 3 === 0 ? sizes.semiThickBorder : sizes.thinBorder,
       borderRight: col % 3 === 2 ? sizes.semiThickBorder : sizes.thinBorder,
     };
-    if (row === 0) borderStyle.borderTop = sizes.thickBorder ;
+    if (row === 0) borderStyle.borderTop = sizes.thickBorder;
     if (row === 8) borderStyle.borderBottom = sizes.thickBorder;
     if (col === 0) borderStyle.borderLeft = sizes.thickBorder;
     if (col === 8) borderStyle.borderRight = sizes.thickBorder;
     return borderStyle;
   };
 
-  const svg = await satori(
-    <div
-      style={{
-        display: 'flex',
-        fontSize: sizes.mainDivFontSize,
-        fontWeight: sizes.mainDivFontWeight,
-        textTransform: "uppercase",
-        letterSpacing: 1,
-        color: "black",
-        justifyContent: "center",
-        margin:  "0 auto"
-      }}
-    >
+  // const svg = await satori(
+  return new ImageResponse(
+    (
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          width: "100%",
+          fontSize: sizes.mainDivFontSize,
+          fontWeight: sizes.mainDivFontWeight,
+          textTransform: "uppercase",
+          letterSpacing: 1,
+          color: "black",
           justifyContent: "center",
-          fontFamily: 'Inter, "Material Icons"',
-          fontSize: sizes.innerDivFontSize,
-          backgroundColor: "white",
-          alignItems: "center",
+          margin: "0 auto",
         }}
       >
-        {/* @ts-expect-error */}
-        <div style={styles.innerBoard}>
-          {sudokuArray.map((num, index) => (
-            <div
-              key={index}
-              // @ts-expect-error
-              style={{ ...styles.cell, ...getCellBorder(index) }}
-            >
-              {num !== 0 ? num : ""}
-            </div>
-          ))}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            width: "100%",
+            justifyContent: "center",
+            fontFamily: 'Inter, "Material Icons"',
+            fontSize: sizes.innerDivFontSize,
+            backgroundColor: "white",
+            alignItems: "center",
+          }}
+        >
+          {/* @ts-expect-error */}
+          <div style={styles.innerBoard}>
+            {sudokuArray.map((num, index) => (
+              <div
+                key={index}
+                // @ts-expect-error
+                style={{ ...styles.cell, ...getCellBorder(index) }}
+              >
+                {num !== 0 ? num : ""}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>,
+    ),
     {
       width: sizes.satoriWidth,
       height: sizes.satoriHeight,
       fonts: [
-        {
-          name: "Inter",
-          data: interReg,
-          weight: 400,
-          style: "normal",
-        },
-        {
-          name: "Inter",
-          data: interBold,
-          weight: 800,
-          style: "normal",
-        },
+        { name: "Roboto_Mono_400", data: await robotoMono400, weight: 400 },
       ],
     }
   );
 
-  const img = await sharp(Buffer.from(svg))
-    .resize(sizes.sharpResize)
-    .toFormat("png")
-    .toBuffer();
-  return new NextResponse(img, {
-    status: 200,
-    headers: {
-      "Content-Type": "image/png",
-      "Cache-Control": "max-age=10",
-    },
-  });
+  // const img = await sharp(Buffer.from(svg))
+  //   .resize(sizes.sharpResize)
+  //   .toFormat("png")
+  //   .toBuffer();
+  // return new NextResponse(img, {
+  //   status: 200,
+  //   headers: {
+  //     "Content-Type": "image/png",
+  //     "Cache-Control": "max-age=10",
+  //   },
+  // });
 }
 
 export const GET = POST;
+
+export const runtime = "edge";
