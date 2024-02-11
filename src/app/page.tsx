@@ -23,7 +23,7 @@ const initialFrame: Frame = {
       action: "post",
     },
   ],
-  postUrl: `${process.env.HOST}/frames`,
+  postUrl: `${process.env.HOST}/sudoku`,
   imageAspectRatio: "1:1",
 };
 
@@ -42,8 +42,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return (
-    <div></div>
-  )
+  return <div></div>;
 }
-
