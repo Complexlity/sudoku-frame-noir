@@ -70,7 +70,7 @@ export function generateSudoku(difficulty: number): number[] {
 
   // Helper function to remove numbers based on difficulty
   function removeNumbers(board: number[], difficulty: number): void {
-    const numToRemove = difficulty === 1 ? 25 : difficulty === 2 ? 35 : 45;
+    const numToRemove = difficulty === 1 ? 10 : difficulty === 2 ? 20 : 30;
     let count = 0;
     while (count < numToRemove) {
       const index = Math.floor(Math.random() * 81);
