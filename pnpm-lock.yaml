@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@aztec/bb.js':
+    specifier: 0.19.0
+    version: 0.19.0
   '@farcaster/core':
     specifier: ^0.13.8
     version: 0.13.8(typescript@5.3.3)
