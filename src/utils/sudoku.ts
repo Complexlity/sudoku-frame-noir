@@ -1,4 +1,4 @@
-export function generateSudoku(difficulty: number): number[] {
+export function generateSudoku(difficulty: 1 | 2 | 3 | 4): number[] {
   const emptyBoard = Array(81).fill(0);
 
   // Helper function to shuffle an array
@@ -70,7 +70,7 @@ export function generateSudoku(difficulty: number): number[] {
 
   // Helper function to remove numbers based on difficulty
   function removeNumbers(board: number[], difficulty: number): void {
-    const numToRemove = difficulty === 1 ? 10 : difficulty === 2 ? 20 : 30;
+    const numToRemove = difficulty === 1 ? 10 : difficulty === 2 ? 20 : difficulty === 3 ? 30 : 40;
     let count = 0;
     while (count < numToRemove) {
       const index = Math.floor(Math.random() * 81);

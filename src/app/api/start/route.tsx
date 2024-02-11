@@ -6,8 +6,12 @@ export async function POST(request: NextRequest){
 
  const nextFrame: Frame = {
    version: "vNext",
-   image: `https://picsum.photos/1146/600`,
+   image: `${process.env.HOST}/sudoku.png`,
    buttons: [
+     {
+       label: "Noob",
+       action: "post",
+     },
      {
        label: "Easy",
        action: "post",
@@ -21,7 +25,7 @@ export async function POST(request: NextRequest){
        action: "post",
      },
    ],
-   ogImage: `https://picsum.photos/600/600`,
+   ogImage: `${process.env.HOST}/sudoku.png`,
    postUrl: `${process.env.HOST}/frames`,
    imageAspectRatio: "1:1",
  };

@@ -7,6 +7,10 @@ const initialFrame: Frame = {
   version: "vNext",
   buttons: [
     {
+      label: "Noob",
+      action: "post",
+    },
+    {
       label: "Easy",
       action: "post",
     },

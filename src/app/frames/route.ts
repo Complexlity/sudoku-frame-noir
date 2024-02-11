@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { generateSudoku } from "@/utils/sudoku";
 
 //TODO: Create function to generate a new sudoku puzzle
-function generateNewGame(level: 1 | 2 | 3): string {
+function generateNewGame(level: 1 | 2 | 3 | 4): string {
   const sudokuArray = generateSudoku(level);
   const sudokuStateAsString = sudokuArray.join("");
   return sudokuStateAsString;
@@ -32,14 +32,18 @@ export async function POST(request: NextRequest) {
   let puzzleState = searchParams.get("puzzleState");
   if (!level || !puzzleState) {
     if (buttonId == 1) {
-      level = "easy";
+      level = "noob";
       puzzleState = generateNewGame(1);
     } else if (buttonId == 2) {
+      level = "easy";
+      puzzleState = generateNewGame(2);
+    } else if (buttonId == 3) {
       level = "medium";
-      puzzleState = generateNewGame(2);
-    } else {
+      puzzleState = generateNewGame(3);
+    }
+     else {
       level = "hard";
-      puzzleState = generateNewGame(2);
+      puzzleState = generateNewGame(4);
     }
 
     const nextFrame: Frame = {
@@ -160,7 +164,7 @@ export async function POST(request: NextRequest) {
     puzzleState = puzzleStateArray.join('')
 
   }
-  
+
 
   // const body = await request.json();
 
