@@ -150,7 +150,6 @@ export async function POST(request: NextRequest) {
 
   //Player must enter a number in the input
   if (!(isNaN(playerMove)) && playerMove !== 0) {
-    console.log("Is not NaN", playerMove)
     for (let i = 0; i < puzzleStateArray.length; i++) {
       const curr = Number(puzzleStateArray[i])
       if (curr === 0) {
@@ -161,9 +160,7 @@ export async function POST(request: NextRequest) {
     puzzleState = puzzleStateArray.join('')
 
   }
-  else {
-  console.log("is NaN", playerMove);
-  }
+  
 
   // const body = await request.json();
 

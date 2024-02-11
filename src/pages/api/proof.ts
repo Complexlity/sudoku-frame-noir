@@ -16,34 +16,22 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
 
   const solution = solveSudoku(puzzle)!
 
-  console.log({solution})
 
 
 
-// console.log({sudoku_program})
 const inputsFail = { solution: puzzle};
   const inputsCorrect = { solution };
-  // console.log({inputsFail, inputsCorrect})
 
 
   //@ts-expect-error
   const backend = new BarretenbergBackend(sudoku_program);
-  // console.log({backend})
   //@ts-expect-error
   const program = new Noir(sudoku_program, backend);
-  // console.log({program})
 
 
  try {
-   console.log("Getting proof data...");
    const proofData = await program.generateFinalProof(inputsCorrect);
-
-   console.log("done");
-   console.log("Verifying proof");
    const verifiedProof = await program.verifyFinalProof(proofData);
-
-   console.log("done");
-   console.log({ verifiedProof });
 	return res.status(200).json({ verifiedProof, proofData });
 
  }catch (error) {
