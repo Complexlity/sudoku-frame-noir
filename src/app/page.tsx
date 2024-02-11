@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 // Declare the frame
 const initialFrame: Frame = {
-  image: "https://picsum.photos/600/600",
+  image: `${process.env.HOST}/sudoku.png`,
   version: "vNext",
   buttons: [
     {
@@ -20,17 +20,17 @@ const initialFrame: Frame = {
     },
   ],
   postUrl: `${process.env.HOST}/frames`,
-  imageAspectRatio: "1:1"
+  imageAspectRatio: "1:1",
 };
 
 // Export Next.js metadata
 export const metadata: Metadata = {
-  title: "Random Image Frame",
-  description: "This is an example of a simple frame using frames.js",
+  title: "Sudoku on Frames",
+  description: "This is a playable sudoku game powered by noir and frames.js",
   openGraph: {
     images: [
       {
-        url: "https://picsum.photos/600/600",
+        url: `${process.env.HOST}/sudoku.png`,
       },
     ],
   },
