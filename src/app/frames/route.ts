@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { generateSudoku } from "@/utils/sudoku";
 
 //TODO: Create function to generate a new sudoku puzzle
-function getPuzzle(level: 1 | 2 | 3): string {
+function generateNewGame(level: 1 | 2 | 3): string {
   const sudokuArray = generateSudoku(level);
   const sudokuStateAsString = sudokuArray.join("");
   return sudokuStateAsString;
@@ -33,13 +33,13 @@ export async function POST(request: NextRequest) {
   if (!level || !puzzleState) {
     if (buttonId == 1) {
       level = "easy";
-      puzzleState = getPuzzle(1);
+      puzzleState = generateNewGame(1);
     } else if (buttonId == 2) {
       level = "medium";
-      puzzleState = getPuzzle(2);
+      puzzleState = generateNewGame(2);
     } else {
       level = "hard";
-      puzzleState = getPuzzle(2);
+      puzzleState = generateNewGame(2);
     }
 
     const nextFrame: Frame = {
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
       solution: puzzleState
     }
     // verify puzzle state on teh backend server
-    const proof = await fetch(`${process.env.PROOF_API_URL}`, {
+    const result = await fetch(`${process.env.PROOF_API_URL}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -95,11 +95,14 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(payload)
 
     });
-    const result = await proof.json()
+    const proof = await result.json()
+
+
+
 
     let imageUrl = `${process.env.HOST}/try-again.gif`
     let isGameWon = false
-    if (result.proof) {
+    if (result.ok) {
       // Return error image
       isGameWon = true
       imageUrl = `${process.env.HOST}/congratulations.gif`
@@ -141,7 +144,7 @@ export async function POST(request: NextRequest) {
   //Else buttonId is 1
   const puzzleStateArray = puzzleState.split('')
 
-  const playerMove = Number(body.untrustedData.inputText)
+  const playerMove = Number((body.untrustedData.inputText)[0])
 
 
 
