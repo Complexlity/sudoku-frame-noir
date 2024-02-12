@@ -36,5 +36,9 @@ npm run dev
 
 The frame would be started on [http://localhost:3000](http://localhost:3000)
 
-
+## Resources
+- [Noir Docs](https://noir-lang.org/docs/)
+- [Crypdoku's](https://github.com/guipublic/crypdoku) Tutorial on Noir - [Link](https://drive.google.com/file/d/1D4XCdiIZVjUW1JHDoMW3pG-15mgjMm9E/)
+- [Sudoku, Worldle and Trivia in Noir](https://github.com/ruizehung/Zero-Knowledge-Sudoku-Wordle-Trivia) by [ruizehung](https://github.com/ruizehung/)
+- [Learn Noir in an afternoon or get your money back](https://www.youtube.com/watch?v=rEVPui0_rig&t=3020s) by Jose Pedro
 
