@@ -1,35 +1,40 @@
-# Frames.js Starter Kit
+# SUDOKU on Frames
+This is a [Farcaster Frame](https://docs.farcaster.xyz/reference/frames/spec) which lets users play sudoku on the platform.
+The solution validator has been written in [Noir][https://noir-lang.org/]. Which is a domain specific language used for generating zero knowledge proofs
 
-This is a boilerplate repo to get started quickly with `frames.js`
+## Pre-requisite
+- Nodejs 18+
 
-## Quickstart
+## Getting Started
 
-1. Install dependencies `yarn install`
-
-2. Run the dev server `yarn dev`
-
-3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-4. Edit `app/page.tsx`
-
-5. Visit [http://localhost:3000/debug](http://localhost:3000/debug) to debug your frame.
-
-6. (Optional) To use a real signer (costs warps), copy `.env.sample` to `.env` and fill in the env variables following the comments provided
-
-## Docs, Questions and Help
-
-- [Frames.js Documentation](https://framesjs.org)
-- [Awesome frames](https://github.com/davidfurlong/awesome-frames?tab=readme-ov-file)
-- Join the [/frames-dev](https://warpcast.com/~/channel/frames-devs) channel on Farcaster to ask questions
-
-## If you get stuck or have feedback, [Message @df please!](https://warpcast.com/df)
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy
-
-```bash
-vercel
+- Clone the repository
+```
+git clone https://github.com/Complexlity/sudoku-frame-noir.git
 ```
 
-more deployment links coming soon, PRs welcome!
+- Install dependencies
+```
+npm install
+```
+
+- Update ENV
+
+```.env
+HOST=http://localhost:3000
+PROOF_API_URL=http://localhost:3000/api/proof
+```
+
+These are the only two values needed in development mode. In production, you should change the `HOST` to the url where the application is deployed.
+Also the `PROOF_API_URL` for some reason, does not work when deployed so I have deployed the api differently using express and nodes and replaced used that url.
+You can find the repo on [Github](https://github.com/Complexlity/express-noir). The codes work exactly the same way.
+
+- Start Development Server
+
+```
+npm run dev
+```
+
+The frame would be started on [http://localhost:3000](http://localhost:3000)
+
+
+
