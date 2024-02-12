@@ -41,7 +41,7 @@ function getSizes(size: BoardSize): SizeSchema {
         satoriWidth: 2250,
         satoriHeight: 2250,
         sharpResize: 2340,
-        marginInnerBoard: "0px",
+        marginInnerBoard: "0",
       };
     default:
       return {
@@ -60,7 +60,7 @@ function getSizes(size: BoardSize): SizeSchema {
         satoriWidth: 600,
         satoriHeight: 400,
         sharpResize: 1200,
-        marginInnerBoard: "0px",
+        marginInnerBoard: "0",
       };
   }
 }
