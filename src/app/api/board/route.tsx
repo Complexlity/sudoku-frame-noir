@@ -57,7 +57,7 @@ function getSizes(size: BoardSize): SizeSchema {
         mainDivFontSize: 5,
         mainDivFontWeight: 600,
         innerDivFontSize: 20,
-        satoriWidth: 600,
+        satoriWidth: 400,
         satoriHeight: 400,
         sharpResize: 1200,
         marginInnerBoard: "20px",
