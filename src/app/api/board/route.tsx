@@ -149,6 +149,7 @@ export async function POST(request: NextRequest) {
           color: "black",
           justifyContent: "center",
           margin: "0 auto",
+          backgroundColor: "#1b2023",
         }}
       >
         <div
@@ -171,7 +172,11 @@ export async function POST(request: NextRequest) {
               <div
                 key={index}
                 // @ts-expect-error
-                style={{ ...styles.cell, ...getCellBorder(index), ...getFirstEmptyCell(num) }}
+                style={{
+                  ...styles.cell,
+                  ...getCellBorder(index),
+                  ...getFirstEmptyCell(num),
+                }}
               >
                 {num !== 0 ? num : ""}
               </div>
