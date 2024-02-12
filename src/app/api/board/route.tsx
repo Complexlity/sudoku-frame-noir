@@ -32,9 +32,9 @@ function getSizes(size: BoardSize): SizeSchema {
         cellHeight: "250px",
         cellFontSize: "250px",
         cellPadding: "15px 15px",
-        thinBorder: "2.5px solid black",
-        semiThickBorder: `10px solid black`,
-        thickBorder: "15px solid black",
+        thinBorder: "3px solid #4b5256",
+        semiThickBorder: `5px solid #9da5a9`,
+        thickBorder: "15px solid #9da5a9",
         mainDivFontSize: 15,
         mainDivFontWeight: 600,
         innerDivFontSize: 28,
@@ -51,9 +51,9 @@ function getSizes(size: BoardSize): SizeSchema {
         cellHeight: "40px",
         cellFontSize: "30px",
         cellPadding: "2px 2px",
-        thinBorder: "1px solid black",
-        semiThickBorder: "1.5px solid black",
-        thickBorder: "2px solid black",
+        thinBorder: ".5px solid #4b5256",
+        semiThickBorder: ".8px solid #9da5a9",
+        thickBorder: "10px solid #9da5a9",
         mainDivFontSize: 5,
         mainDivFontWeight: 600,
         innerDivFontSize: 20,
@@ -86,6 +86,16 @@ export async function POST(request: NextRequest) {
   }
 
   const sizes = getSizes(size);
+  let emptyFound = false
+  function getFirstEmptyCell(value: number) {
+    if (!emptyFound && value === 0) {
+      emptyFound = true
+      return {
+        backgroundColor: "#4b5256",
+      };
+    }
+    return {}
+  }
 
   const styles = {
     innerBoard: {
@@ -150,7 +160,8 @@ export async function POST(request: NextRequest) {
             justifyContent: "center",
             fontFamily: 'Inter, "Material Icons"',
             fontSize: sizes.innerDivFontSize,
-            backgroundColor: "white",
+            backgroundColor: "#1b2023",
+            color: "#c8cbc9",
             alignItems: "center",
           }}
         >
@@ -160,7 +171,7 @@ export async function POST(request: NextRequest) {
               <div
                 key={index}
                 // @ts-expect-error
-                style={{ ...styles.cell, ...getCellBorder(index) }}
+                style={{ ...styles.cell, ...getCellBorder(index), ...getFirstEmptyCell(num) }}
               >
                 {num !== 0 ? num : ""}
               </div>
