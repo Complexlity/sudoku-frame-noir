@@ -53,7 +53,7 @@ function getSizes(size: BoardSize): SizeSchema {
         cellPadding: "2px 2px",
         thinBorder: ".5px solid #4b5256",
         semiThickBorder: ".8px solid #9da5a9",
-        thickBorder: "10px solid #9da5a9",
+        thickBorder: "4px solid #9da5a9",
         mainDivFontSize: 5,
         mainDivFontWeight: 600,
         innerDivFontSize: 20,
