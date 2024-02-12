@@ -41,7 +41,7 @@ function getSizes(size: BoardSize): SizeSchema {
         satoriWidth: 2250,
         satoriHeight: 2250,
         sharpResize: 2340,
-        marginInnerBoard: "0",
+        marginInnerBoard: "10px",
       };
     default:
       return {
@@ -58,9 +58,9 @@ function getSizes(size: BoardSize): SizeSchema {
         mainDivFontWeight: 600,
         innerDivFontSize: 20,
         satoriWidth: 600,
-        satoriHeight: 360,
+        satoriHeight: 400,
         sharpResize: 1200,
-        marginInnerBoard: "0",
+        marginInnerBoard: "20px",
       };
   }
 }
