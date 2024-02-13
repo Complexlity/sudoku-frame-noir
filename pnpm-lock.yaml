@@ -23,6 +23,9 @@ dependencies:
   '@noir-lang/noir_js':
     specifier: ^0.23.0
     version: 0.23.0
+  '@noir-lang/noir_wasm':
+    specifier: ^0.23.0
+    version: 0.23.0
   '@noir-lang/types':
     specifier: ^0.23.0
     version: 0.23.0
@@ -393,6 +396,12 @@ packages:
       '@noir-lang/acvm_js': 0.39.0
       '@noir-lang/noirc_abi': 0.23.0
       '@noir-lang/types': 0.23.0
+    dev: false
+
+  /@noir-lang/noir_wasm@0.23.0:
+    resolution: {integrity: sha512-HL78frUo60bKrUaxOAJQtyrmBWUyiQbSp4yQkh9A/vFAnEhxehDwd8peCGKMZKX66JpRccClv52zyb5O/ECE4g==}
+    dependencies:
+      pako: 2.1.0
     dev: false
 
   /@noir-lang/noirc_abi@0.23.0:
@@ -2603,6 +2612,10 @@ packages:
 
   /pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
+    dev: false
+
+  /pako@2.1.0:
+    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
     dev: false
 
   /parent-module@1.0.1:
