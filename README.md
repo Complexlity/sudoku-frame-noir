@@ -24,9 +24,9 @@ HOST=http://localhost:3000
 PROOF_API_URL=http://localhost:3000/api/proof
 ```
 
-These are the only two values needed in development mode. In production, you should change the `HOST` to the url where the application is deployed.
+These are the only two values needed in development mode. In production, you should change the `HOST` to the url where the application is deployed.<br/>
 Also the `PROOF_API_URL` (/api/proof) for some reason, does not work when deployed on vercel so I have deployed the api differently using express and used that url.
-You can find the repo on [Github](https://github.com/Complexlity/express-noir). The codes work exactly the same way.
+You can find the repo on [Github - https://github.com/Complexlity/express-noir](https://github.com/Complexlity/express-noir). The codes work exactly the same way.
 
 - Start Development Server
 
