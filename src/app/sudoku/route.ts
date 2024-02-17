@@ -13,9 +13,7 @@ function generateNewGame(level: 1 | 2 | 3 | 4): string {
 }
 
 export async function POST(request: NextRequest) {
-  // Call the api every turn so the backend and program variable is active when verification takes place (cuts the verification time)
-  fetch(`${process.env.PROOF_API_URL}`).then(() => {
-  });
+  
   let body;
   try {
     body = await request.json();
