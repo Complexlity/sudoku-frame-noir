@@ -13,7 +13,7 @@ function generateNewGame(level: 1 | 2 | 3 | 4): string {
 }
 
 export async function POST(request: NextRequest) {
-  
+
   let body;
   try {
     body = await request.json();
@@ -121,6 +121,11 @@ export async function POST(request: NextRequest) {
           target: isGameWon
             ? "https://noir-lang.org/"
             : "https://en.wikipedia.org/wiki/Sudoku",
+        },
+        {
+          label: "Github",
+          action: "link",
+          target:"https://github.com/Complexlity/sudoku-frame-noir"
         },
       ],
       ogImage: imageUrl,
