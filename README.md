@@ -1,6 +1,6 @@
 # SUDOKU on Frames
 This is a [Farcaster Frame](https://docs.farcaster.xyz/reference/frames/spec) which lets users play sudoku on the platform.
-The solution validator has been written in [Noir][https://noir-lang.org/]. Which is a domain specific language used for generating zero knowledge proofs
+The solution validator has been written in [Noir](https://noir-lang.org/). Which is a domain specific language used for generating zero knowledge proofs
 
 ## Pre-requisite
 - Nodejs 18+
