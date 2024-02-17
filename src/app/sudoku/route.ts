@@ -89,8 +89,8 @@ export async function POST(request: NextRequest) {
     const payload = {
       solution: puzzleState,
     };
-    // verify puzzle state on teh backend server
-    const result = await fetch(`${process.env.PROOF_API_URL}/proof`, {
+    // verify puzzle state on the backend server
+    const result = await fetch(`${process.env.PROOF_API_URL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
