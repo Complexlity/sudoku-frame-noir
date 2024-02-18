@@ -24,8 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
 
-// const inputsFail = { solution: puzzle};
-  const inputsCorrect = { solution };
+  const input = { solution };
 
 
 
@@ -36,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
  try {
-   const proofData = await program.generateFinalProof(inputsCorrect);
+   const proofData = await program.generateFinalProof(input);
    const verifiedProof = await program.verifyFinalProof(proofData);
 	return res.status(200).json({ verifiedProof, proofData });
 
@@ -45,9 +44,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
    //@ts-expect-error
    return res.status(500).json({error: error.message})
  }
-
-
-
 
 }
 
