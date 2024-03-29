@@ -25,6 +25,16 @@ const initialFrame: Frame = {
   ],
   postUrl: `${process.env.HOST}/sudoku`,
   imageAspectRatio: "1:1",
+  accepts: [
+    {
+      id: "farcaster",
+      version: "vNext",
+    },
+    {
+      id: "xmtp",
+      version: "vNext",
+    },
+  ],
 };
 
 // Export Next.js metadata
@@ -38,7 +48,10 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: getFrameFlattened(initialFrame),
+  other: {
+    ...getFrameFlattened(initialFrame),
+    "of:accepts:xmtp": "vNext",
+  },
 };
 
 export default function Page() {

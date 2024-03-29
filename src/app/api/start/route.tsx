@@ -26,6 +26,15 @@ export async function POST(request: NextRequest) {
     ogImage: `${process.env.HOST}/sudoku.png`,
     postUrl: `${process.env.HOST}/sudoku`,
     imageAspectRatio: "1:1",
+   accepts: [ {
+        id: 'farcaster',
+        version: 'vNext',
+      },
+      {
+        id: 'xmtp',
+        version: 'vNext',
+      },]
+
   };
 
   // Return the frame as HTML

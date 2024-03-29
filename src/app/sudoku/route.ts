@@ -68,6 +68,15 @@ export async function POST(request: NextRequest) {
       postUrl: `${process.env.HOST}/sudoku?level=${level}&puzzleState=${puzzleState}`,
       inputText: "Enter next number",
       imageAspectRatio: "1:1",
+      accepts: [{
+        id: 'farcaster',
+        version: 'vNext',
+      },
+      {
+        id: 'xmtp',
+        version: 'vNext',
+      },]
+
     };
 
     const html = getFrameHtml(nextFrame);
@@ -125,12 +134,22 @@ export async function POST(request: NextRequest) {
         {
           label: "Github",
           action: "link",
-          target:"https://github.com/Complexlity/sudoku-frame-noir"
+          target: "https://github.com/Complexlity/sudoku-frame-noir",
         },
       ],
       ogImage: imageUrl,
       postUrl: `${process.env.HOST}/api/start`,
       imageAspectRatio: "1:1",
+      accepts: [
+        {
+          id: "farcaster",
+          version: "vNext",
+        },
+        {
+          id: "xmtp",
+          version: "vNext",
+        },
+      ],
     };
 
     // Return the frame as HTML
@@ -192,6 +211,16 @@ export async function POST(request: NextRequest) {
     postUrl: `${process.env.HOST}/sudoku?level=${level}&puzzleState=${puzzleState}`,
     inputText: "Enter next number",
     imageAspectRatio: "1:1",
+    accepts: [
+      {
+        id: "farcaster",
+        version: "vNext",
+      },
+      {
+        id: "xmtp",
+        version: "vNext",
+      },
+    ],
   };
 
   // Return the frame as HTML
