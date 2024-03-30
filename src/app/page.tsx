@@ -1,5 +1,7 @@
-import { Frame, getFrameFlattened } from "frames.js";
+import { Frame } from "frames.js";
+import { getFrameFlattened } from "@/utils/getFrameHtmlPatched";
 import type { Metadata } from "next";
+
 
 // Declare the frame
 const initialFrame: Frame = {
@@ -48,10 +50,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: {
-    ...getFrameFlattened(initialFrame),
-    "of:accepts:xmtp": "vNext",
-  },
+  other: getFrameFlattened(initialFrame),
 };
 
 export default function Page() {

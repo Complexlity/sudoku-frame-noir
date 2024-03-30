@@ -1,4 +1,5 @@
-import { Frame, getFrameHtml } from "frames.js";
+import { Frame } from "frames.js";
+import { getFrameHtml } from "@/utils/getFrameHtmlPatched";
 import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {

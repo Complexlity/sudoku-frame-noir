@@ -2,7 +2,8 @@
 // ./app/sudoku/route.ts
 
 import { generateSudoku } from "@/utils/sudoku";
-import { Frame, getFrameHtml } from "frames.js";
+import { Frame } from "frames.js";
+import { getFrameHtml } from "@/utils/getFrameHtmlPatched";
 import { NextRequest, NextResponse } from "next/server";
 
 //TODO: Create function to generate a new sudoku puzzle
@@ -211,16 +212,7 @@ export async function POST(request: NextRequest) {
     postUrl: `${process.env.HOST}/sudoku?level=${level}&puzzleState=${puzzleState}`,
     inputText: "Enter next number",
     imageAspectRatio: "1:1",
-    accepts: [
-      {
-        id: "farcaster",
-        version: "vNext",
-      },
-      {
-        id: "xmtp",
-        version: "vNext",
-      },
-    ],
+
   };
 
   // Return the frame as HTML
